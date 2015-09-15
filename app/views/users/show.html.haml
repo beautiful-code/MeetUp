@@ -1,0 +1,13 @@
+%h3 Create a Group
+= render 'shared/newgroup'
+
+-if @group_memberships.any?
+  .row
+    %h3 My Groups
+    %ol
+      = render @group_memberships
+
+
+
+
+

@@ -1,0 +1,12 @@
+%li
+  = group.name
+  (
+  = group.members.count
+  )
+  - if current_user == group.owner
+    #{link_to "Delete", group, method: :delete, data: { confirm: "You sure?" }}
+  - if !!current_user.member_of?(group) && current_user != group.owner
+    #{link_to "Leave", current_user.member_of?(group), method: :delete, data: { confirm: "You sure?" }}
+  - if !current_user.member_of?(group)
+    #{link_to "Join", memberships_path(member_id: current_user.id, group_id: group.id), method: :post}
+  #{link_to "View", group}

@@ -1,0 +1,7 @@
+%h3 
+  = @group.name
+(
+= @group.members.count
+members)
+%ol
+  = render @group.members
