@@ -6,4 +6,10 @@ class Group < ActiveRecord::Base
     dependent: :destroy
 
   has_many :members, through: :membership_relations, source: :user, foreign_key: "member_id"
+
+  after_commit :add_owner_to_the_group
+
+  def add_owner_to_the_group
+    self.owner.join self
+  end
 end

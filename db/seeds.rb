@@ -9,11 +9,6 @@
 User.create(email: "gouthamj99@gmail.com", password: "test1234", password_confirmation: "test1234")
 User.create(email: "gj@abcd.com", password: "test1234", password_confirmation: "test1234")
 
-User.first.groups.create(name:"HTC Club")
-User.first.join(Group.find(1))
-User.first.groups.create(name:"Motorola Club")
-User.first.join(Group.find(2))
-
-
-User.last.groups.create(name:"Economics Club")
-User.last.join(Group.find(3))
+User.first.owned_groups.create(name:"HTC Club")
+User.first.owned_groups.create(name:"Motorola Club")
+User.last.owned_groups.create(name:"Economics Club")

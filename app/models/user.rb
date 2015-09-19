@@ -8,10 +8,10 @@ class User < ActiveRecord::Base
     foreign_key: "member_id",
     dependent: :destroy
 
-  has_many :ownership_groups, class_name: "Group", 
+  has_many :owned_groups, class_name: "Group", 
     foreign_key: "user_id", dependent: :destroy
 
-  has_many :membership_groups, through: :membership_relations, source: :group
+  has_many :mygroups, through: :membership_relations, source: :group
 
   def member_of?(group)
     membership_relations.find_by(group_id: group.id)

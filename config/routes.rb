@@ -1,7 +1,12 @@
 MeetUp::Application.routes.draw do
   devise_for :users
   resources :users
-  resources :groups
+  resources :groups do
+    resources :events, only: [:create]
+  end
+
+  resources :events, only: [:update, :destroy]
+
   resources :memberships
   root 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
