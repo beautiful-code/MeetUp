@@ -1,0 +1,12 @@
+%li
+  = event.name
+  ( Participants:
+  = event.participants.count
+  )
+  - if current_user == event.creator
+    #{link_to "Delete", event, method: :delete, data: { confirm: "You sure?"}}
+  - if !!current_user.participant_of?(event) && current_user != event.creator
+    #{link_to "Leave Event", current_user.participant_of?(event), method: :delete, data: {confirm: "You sure?"} }
+  - if !current_user.participant_of?(event)
+    #{link_to "Join Event", participations_path(user_id: current_user.id, event_id: event.id), method: :post}
+  #{link_to "View", group_event_path(event.group, event)}

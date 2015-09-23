@@ -1,11 +1,23 @@
-%h3 Create a Group
-= render 'shared/newgroup'
-
--if @group_memberships.any?
-  .row
+.row
+  .container
     %h3 My Groups
-    %ol
-      = render @group_memberships
+-if @mygroups.any?
+  .row
+    .container
+      %ol
+        = render @mygroups
+
+= link_to 'Create a group', new_group_path
+.row
+  .container
+    %h3 My Events
+-if @myevents.any?
+  .row
+    .container
+      %ol
+        = render @myevents
+
+= link_to 'Create an event', new_event_path
 
 
 

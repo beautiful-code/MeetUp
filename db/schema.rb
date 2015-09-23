@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914111017) do
+ActiveRecord::Schema.define(version: 20150921115030) do
+
+  create_table "events", force: true do |t|
+    t.text     "name"
+    t.integer  "group_id"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at"
+    t.integer  "user_id"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["group_id"], name: "index_events_on_group_id"
+  add_index "events", ["user_id"], name: "index_events_on_user_id"
 
   create_table "groups", force: true do |t|
     t.text     "name"
@@ -30,6 +43,15 @@ ActiveRecord::Schema.define(version: 20150914111017) do
   end
 
   add_index "memberships", ["member_id", "group_id"], name: "index_memberships_on_member_id_and_group_id", unique: true
+
+  create_table "participations", force: true do |t|
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "participations", ["event_id", "user_id"], name: "index_participations_on_event_id_and_user_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

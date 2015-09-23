@@ -5,3 +5,10 @@
 members)
 %ol
   = render @group.members
+
+%h3 Events
+%ol
+  - if @group.events.any?
+    = render @group.events
+  - else
+    There are no events in this group

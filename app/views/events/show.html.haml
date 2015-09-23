@@ -1,0 +1,19 @@
+%h3
+  = @event.name
+.row
+  .container
+    Start at
+    =@event.start_at
+    %br
+    End at
+    =@event.end_at
+    %br
+    Group
+    =@event.group.name
+    %br
+    Owner
+    =@event.creator.email
+%h4
+  = pluralize(@event.participants.count, 'Participant')
+= render @event.participants
+

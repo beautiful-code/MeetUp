@@ -1,9 +1,8 @@
 .row
-  %h1 All Groups
-  = form_tag groups_path, :method => 'get' do
+  %h1 All Events
+  = form_tag events_path, :method => 'get' do
     %p
       = text_field_tag :search, params[:search]
       = submit_tag "Search", :name => nil
   %ol
-    =render @groups
-
+    =render @events

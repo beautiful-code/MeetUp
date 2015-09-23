@@ -1,12 +1,13 @@
 class GroupsController < ApplicationController
+  before_action :authenticate_user!
   def create
     @group = current_user.owned_groups.build(group_params)
     if @group.save
-      flash[:success] = "Group created!"
       redirect_to user_path(current_user)
+      flash[:success] = "Group created!"
     else
-      flash[:danger] = "Group creation failed!"
       redirect_to request.referrer || group_path
+      flash[:danger] = "Group creation failed!"
     end
   end
 
@@ -18,15 +19,20 @@ class GroupsController < ApplicationController
   end
 
   def index
-    @groups = Group.all
+    @groups = Group.search(params[:search])
   end
 
   def show
     @group = Group.find(params[:id])
   end
 
+  def new
+    @newgroup = Group.new
+  end
+
   private
   def group_params
     params.require(:group).permit(:name)
   end
+
 end

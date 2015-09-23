@@ -17,11 +17,17 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'bootstrap-sass'
 
+gem 'bootstrap-glyphicons'
+
 gem 'devise'
 
 gem 'haml-rails'
 
 gem 'byebug'
+
+gem 'momentjs-rails'
+
+gem 'bootstrap3-datetimepicker-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
