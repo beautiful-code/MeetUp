@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150921115030) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "events", force: true do |t|
     t.text     "name"
     t.integer  "group_id"
@@ -23,8 +26,8 @@ ActiveRecord::Schema.define(version: 20150921115030) do
     t.datetime "updated_at"
   end
 
-  add_index "events", ["group_id"], name: "index_events_on_group_id"
-  add_index "events", ["user_id"], name: "index_events_on_user_id"
+  add_index "events", ["group_id"], name: "index_events_on_group_id", using: :btree
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "groups", force: true do |t|
     t.text     "name"
@@ -33,7 +36,7 @@ ActiveRecord::Schema.define(version: 20150921115030) do
     t.datetime "updated_at"
   end
 
-  add_index "groups", ["user_id"], name: "index_groups_on_user_id"
+  add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
 
   create_table "memberships", force: true do |t|
     t.integer  "group_id"
@@ -42,7 +45,7 @@ ActiveRecord::Schema.define(version: 20150921115030) do
     t.datetime "updated_at"
   end
 
-  add_index "memberships", ["member_id", "group_id"], name: "index_memberships_on_member_id_and_group_id", unique: true
+  add_index "memberships", ["member_id", "group_id"], name: "index_memberships_on_member_id_and_group_id", unique: true, using: :btree
 
   create_table "participations", force: true do |t|
     t.integer  "event_id"
@@ -51,7 +54,7 @@ ActiveRecord::Schema.define(version: 20150921115030) do
     t.datetime "updated_at"
   end
 
-  add_index "participations", ["event_id", "user_id"], name: "index_participations_on_event_id_and_user_id", unique: true
+  add_index "participations", ["event_id", "user_id"], name: "index_participations_on_event_id_and_user_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -68,7 +71,7 @@ ActiveRecord::Schema.define(version: 20150921115030) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
