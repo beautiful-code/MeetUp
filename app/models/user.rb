@@ -2,7 +2,9 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:google_oauth2]
+
 
   has_many :membership_relations, class_name: "Membership",
     foreign_key: "member_id",
@@ -43,5 +45,14 @@ class User < ActiveRecord::Base
 
   def leave_event(event)
     participation_relationship.find_by(event_id: event.id).destroy
+  end
+
+  def self.from_omniauth (auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.email = auth.info.email
+      user.password = Devise.friendsly_token[0,20]
+    end
   end
 end

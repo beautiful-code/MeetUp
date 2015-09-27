@@ -23,6 +23,8 @@ gem 'devise'
 
 gem 'haml-rails'
 
+gem "omniauth-google-oauth2"
+
 gem 'byebug'
 
 gem 'momentjs-rails'

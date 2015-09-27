@@ -1,5 +1,5 @@
 MeetUp::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {:omniauth_callbacks => "callbacks"}
   resources :users
   resources :groups do
     resources :events, only: [:show]
