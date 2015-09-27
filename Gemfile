@@ -46,6 +46,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+ruby "2.1.5"
+
+gen 'rails_12factor', group: :production
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
