@@ -5,13 +5,17 @@ class EventsController < ApplicationController
     @group = Group.find(params[:event][:group_id])
     @event = @group.events.build(event_params)
     @event.user_id = current_user.id
+    @user = current_user
 
     if @event.save
       flash[:success] = "Event Created"
     else
       flash[:danger] = "Soemthing went wrong!"
     end
-    redirect_to request.referrer || user_path(current_user)
+    respond_to do |format|
+      format.html { redirect_to request.referrer || user_path(current_user) } 
+      format.js
+    end
   end
 
   def new

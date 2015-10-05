@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
     foreign_key: "member_id",
     dependent: :destroy
 
+  has_many :notifications
+
   has_many :participation_relationship, class_name: "Participation", 
     foreign_key: 'user_id', dependent: :destroy
 
@@ -40,6 +42,7 @@ class User < ActiveRecord::Base
   end
 
   def join_event(event)
+    puts "Join event called:" + event.name
     participation_relationship.create(event_id: event.id)
   end
 
@@ -52,7 +55,11 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
-      user.password = Devise.friendsly_token[0,20]
+      user.password = Devise.friendly_token[0,20]
     end
+  end
+
+  def unread_notifications
+    notifications.where(notification_status: Notification::Status::UNREAD)
   end
 end

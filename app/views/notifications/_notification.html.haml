@@ -1,0 +1,5 @@
+%li.divider{ role: 'separator'}
+%li
+  = [notification.member_email, notification.notification_type, notification.event_name].reject(&:empty?).join(' ')
+
+

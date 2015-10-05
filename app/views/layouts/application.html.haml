@@ -6,20 +6,58 @@
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
-    = favicon_link_tag 'favicon.ico'
+    = favicon_link_tag 'smalllogo.ico'
   %body
+    #user_nav
+      %nav.navbar.navbar-default
+        .container-fluid
+          .navbar-header
+            %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            = link_to image_tag('logo.png'), root_path, class: 'navbar-brand main-logo'
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            - if user_signed_in?
+              %ul.nav.navbar-nav.navbar-right
+                %li
+                  #{link_to "Home", user_path(current_user)}
+                %li
+                  #{link_to "All Groups", groups_path}
+                %li
+                  #{link_to "All Events", events_path}
+                %li
+                  #{link_to "Sign out", destroy_user_session_path, :method => :delete}
+                %li.dropdown
+                  %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                    Notifications
+                    %span.badge#notifications_count
+                      = current_user.notifications.count
+                    %span.caret
+                  %ul.dropdown-menu
+                    = render current_user.unread_notifications
+            - else
+              %ul.nav.navbar-nav.navbar-right
+                %li
+                  #{link_to "Sign up", new_user_registration_path}
+                %li
+                  #{link_to "Sign in", new_user_session_path}
     .row
       .container
-        #user_nav
-          - if user_signed_in?
-            Signed in as #{current_user.email}.
-            #{link_to "Home", user_path(current_user)}
-            #{link_to "All Groups", groups_path}
-            #{link_to "All Events", events_path}
-            #{link_to "Sign out", destroy_user_session_path, :method => :delete}
-          - else
-            = link_to "Sign up", new_user_registration_path
-            or #{link_to "sign in", new_user_session_path}
+        - if self.flash.any?
+          .flash-message
+            - self.flash.each do |key,value|
+              %div{class: "alert alert-#{key} fade in"}
+                %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} x
+                %p= value.html_safe
     .row
       .container
         = yield
+
+:javascript
+  $(document).ready(function(){
+    setTimeout(function(){
+    $(".flash-message").hide();
+    }, 5000);
+  })

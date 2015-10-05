@@ -19,6 +19,8 @@ gem 'bootstrap-sass'
 
 gem 'bootstrap-glyphicons'
 
+gem 'bootstrap_flash_messages'
+
 gem 'devise'
 
 gem 'haml-rails'
@@ -26,6 +28,8 @@ gem 'haml-rails'
 gem "omniauth-google-oauth2"
 
 gem 'byebug'
+
+gem 'bootstrap_form'
 
 gem 'momentjs-rails'
 

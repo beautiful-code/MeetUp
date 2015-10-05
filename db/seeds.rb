@@ -14,8 +14,10 @@ User.first.owned_groups.create(name:"Motorola Club")
 User.last.owned_groups.create(name:"Economics Club")
 User.last.owned_groups.create(name:"Linux Club")
 
-User.first.owned_groups.first.events.create(name:"Bhongir Trekking", start_at: "2015-09-22 13:02:48", end_at: "2015-09-22 13:02:48", user_id: 1)
-User.first.owned_groups.first.events.create(name:"Wildlife Safari", start_at: "2015-09-22 13:02:48", end_at: "2015-09-22 13:02:48", user_id: 1)
-User.last.owned_groups.last.events.create(name:"GRUB vs LILO", start_at: "2015-09-22 13:02:48", end_at: "2015-09-22 13:02:48", user_id: 2)
+User.first.owned_groups.first.events.create(name:"Bhongir Trekking", start_at: "2015-09-22 13:02:48", end_at: "2015-09-22 13:02:48", user_id: User.first.id)
+User.first.owned_groups.first.events.create(name:"Wildlife Safari", start_at: "2015-09-22 13:02:48", end_at: "2015-09-22 13:02:48", user_id: User.first.id)
+User.last.owned_groups.last.events.create(name:"GRUB vs LILO", start_at: "2015-09-22 13:02:48", end_at: "2015-09-22 13:02:48", user_id: User.last.id)
+User.last.join_event(Event.find(1))
+User.last.leave_event(Event.find(1))
 
 

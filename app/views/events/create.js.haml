@@ -1,0 +1,5 @@
+$('#new_event_form').remove()
+$('#create_new_event').show()
+$('#my_events').append("#{escape_javascript render @event}")
+$('#notifications_count').html("#{escape_javascript @user.notifications.count.to_s}")
+$('#notifications_count').show()

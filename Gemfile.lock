@@ -39,6 +39,8 @@ GEM
       sass (>= 3.2.19)
     bootstrap3-datetimepicker-rails (4.15.35)
       momentjs-rails (>= 2.8.1)
+    bootstrap_flash_messages (1.0.2)
+    bootstrap_form (2.3.0)
     builder (3.1.4)
     byebug (6.0.2)
     coffee-rails (4.0.1)
@@ -186,6 +188,8 @@ DEPENDENCIES
   bootstrap-glyphicons
   bootstrap-sass
   bootstrap3-datetimepicker-rails
+  bootstrap_flash_messages
+  bootstrap_form
   byebug
   coffee-rails (~> 4.0.0)
   devise

@@ -1,25 +1,21 @@
 .row
   .container
-    %h3 My Groups
--if @mygroups.any?
-  .row
-    .container
-      %ol
-        = render @mygroups
+    .col-xs-6
+      %h3 My Groups
+      -if @mygroups.any?
+        .row
+          .container
+            %ol#my_groups
+              = render @mygroups
 
-= link_to 'Create a group', new_group_path
-.row
-  .container
-    %h3 My Events
--if @myevents.any?
-  .row
-    .container
-      %ol
-        = render @myevents
+      = link_to 'Create a group', new_group_path, id: "create_new_group", remote: true, class: 'btn btn-primary'
 
-= link_to 'Create an event', new_event_path
+    .col-xs-6
+      %h3 My Events
+      -if @myevents.any?
+        .row
+          .container
+            %ol#my_events
+              = render @myevents
 
-
-
-
-
+      = link_to 'Create an event', new_event_path, id: "create_new_event", remote: true, class: 'btn btn-primary'

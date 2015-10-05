@@ -3,11 +3,13 @@ class GroupsController < ApplicationController
   def create
     @group = current_user.owned_groups.build(group_params)
     if @group.save
-      redirect_to user_path(current_user)
       flash[:success] = "Group created!"
     else
-      redirect_to request.referrer || group_path
       flash[:danger] = "Group creation failed!"
+    end
+    respond_to do |format|
+      format.html { redirect_to request.referrer || user_path(current_user) } 
+      format.js
     end
   end
 

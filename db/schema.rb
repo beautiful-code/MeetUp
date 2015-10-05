@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150927115608) do
+ActiveRecord::Schema.define(version: 20151002070233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,19 @@ ActiveRecord::Schema.define(version: 20150927115608) do
   end
 
   add_index "memberships", ["member_id", "group_id"], name: "index_memberships_on_member_id_and_group_id", unique: true, using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.string   "notification_status"
+    t.string   "notification_type"
+    t.integer  "member_id"
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["event_id"], name: "index_notifications_on_event_id", using: :btree
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "participations", force: true do |t|
     t.integer  "event_id"
